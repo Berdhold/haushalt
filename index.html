@@ -262,6 +262,17 @@
     <div class="tabs" id="tabs"></div>
     <div id="taskLists"></div>
     <div class="status-msg" id="statusMsg"></div>
+
+    <details style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 16px;">
+      <summary style="cursor: pointer; color: #999; font-size: 0.85em; user-select: none;">Daten exportieren / importieren</summary>
+      <div style="margin-top: 12px;">
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+          <button type="button" class="action-btn btn-postpone" id="exportBtn">Exportieren</button>
+          <button type="button" class="action-btn btn-delete" id="importBtn">Importieren (ersetzt Liste!)</button>
+        </div>
+        <textarea id="transferBox" placeholder="Export erscheint hier zum Kopieren, oder Daten zum Importieren hier einfügen..." style="width:100%; min-height:80px; padding:10px; border:2px solid #eee; border-radius:8px; font-family:monospace; font-size:0.75em;"></textarea>
+      </div>
+    </details>
   </div>
 </div>
 
@@ -1190,6 +1201,32 @@
   }
 
   document.getElementById('addTaskBtn').addEventListener('click', addTask);
+
+  document.getElementById('exportBtn').addEventListener('click', function () {
+    var box = document.getElementById('transferBox');
+    box.value = JSON.stringify(tasks, null, 2);
+    box.focus();
+    box.select();
+  });
+
+  document.getElementById('importBtn').addEventListener('click', function () {
+    var box = document.getElementById('transferBox');
+    var raw = box.value.trim();
+    if (!raw) { setStatus('Bitte zuerst Daten ins Textfeld einfügen.'); return; }
+    var parsed;
+    try {
+      parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) throw new Error('kein Array');
+    } catch (err) {
+      setStatus('Fehler: Das sieht nicht nach gültig exportierten Daten aus.');
+      return;
+    }
+    if (!confirm('Aktuelle Liste (' + tasks.length + ' Aufgaben) durch importierte Liste (' + parsed.length + ' Aufgaben) ersetzen?')) return;
+    tasks = parsed.map(normalizeTask);
+    saveTasks();
+    renderAll();
+    setStatus('Import erfolgreich – ' + tasks.length + ' Aufgaben übernommen.');
+  });
 
   document.getElementById('newTaskInput').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') addTask();
