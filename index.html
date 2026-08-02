@@ -273,6 +273,19 @@
         <textarea id="transferBox" placeholder="Export erscheint hier zum Kopieren, oder Daten zum Importieren hier einfügen..." style="width:100%; min-height:80px; padding:10px; border:2px solid #eee; border-radius:8px; font-family:monospace; font-size:0.75em;"></textarea>
       </div>
     </details>
+
+    <details style="margin-top: 10px; padding-top: 10px;">
+      <summary style="cursor: pointer; color: #999; font-size: 0.85em; user-select: none;">Grundliste (für neue Geräte) einsehen/bearbeiten</summary>
+      <div style="margin-top: 12px;">
+        <div class="offset-label" style="margin-bottom:8px;">Diese Liste wird nur verwendet, wenn auf einem Gerät/Browser noch keine Daten gespeichert sind. Änderungen hier wirken sich nicht auf deine aktuell aktive Aufgabenliste aus.</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+          <button type="button" class="action-btn btn-postpone" id="baseListLoadBtn">Grundliste anzeigen</button>
+          <button type="button" class="action-btn btn-postpone" id="baseListSaveBtn">Speichern</button>
+          <button type="button" class="action-btn btn-delete" id="baseListResetBtn">Auf Werkseinstellung zurücksetzen</button>
+        </div>
+        <textarea id="baseListBox" placeholder="Klicke 'Grundliste anzeigen', um sie hier zu sehen und zu bearbeiten..." style="width:100%; min-height:100px; padding:10px; border:2px solid #eee; border-radius:8px; font-family:monospace; font-size:0.75em;"></textarea>
+      </div>
+    </details>
   </div>
 </div>
 
@@ -300,50 +313,80 @@
   var JS_DAY_TO_LABEL = ['So','Mo','Di','Mi','Do','Fr','Sa'];
 
   var DEFAULT_TASKS = [
-    { text: 'Küche kurz aufräumen', category: 'taglich' },
-    { text: 'Bioabfall/Kompost leeren', category: 'taglich' },
-    { text: 'Spülmaschine ein-/ausräumen', category: 'taglich' },
-
-    { text: 'Bad putzen', category: 'woechentlich' },
-    { text: 'Böden wischen', category: 'woechentlich' },
-    { text: 'Wäsche waschen', category: 'woechentlich' },
-    { text: 'Kühlschrank auf ablaufende Lebensmittel checken', category: 'woechentlich' },
-    { text: 'Balkon kehren/aufräumen', category: 'woechentlich' },
-
-    { text: 'Bettwäsche wechseln', category: 'zweiwoechentlich' },
-    { text: 'Backofen reinigen', category: 'zweiwoechentlich' },
-    { text: 'Gelber Sack/Verpackungsmüll rausbringen', category: 'zweiwoechentlich' },
-    { text: 'Altpapier rausbringen', category: 'zweiwoechentlich' },
-
-    { text: 'Fenster putzen', category: 'monatlich' },
-    { text: 'Vorratsschrank auf Haltbarkeit prüfen', category: 'monatlich' },
-    { text: 'Fahrrad-Reifendruck prüfen', category: 'monatlich' },
-    { text: 'Balkonkästen düngen (organisch)', category: 'monatlich' },
-
-    { text: 'Kühlschrank/Gefrierfach abtauen und reinigen', category: 'quartalsweise' },
-    { text: 'Keller auf Feuchtigkeit/Schädlinge kontrollieren', category: 'quartalsweise' },
-    { text: 'Fahrräder gründlich warten (Bremsen, Kette, Schrauben)', category: 'quartalsweise' },
-    { text: 'Wasserfilter wechseln', category: 'quartalsweise' },
-
-    { text: 'Rauchmelder testen', category: 'halbjaehrlich' },
-    { text: 'Matratze wenden', category: 'halbjaehrlich' },
-    { text: 'Balkon/Keller saisonal umräumen', category: 'halbjaehrlich' },
-
-    { text: 'Fahrräder zur Inspektion bringen', category: 'jaehrlich' },
-    { text: 'Blumenerde/Substrat auf dem Balkon erneuern', category: 'jaehrlich' },
-    { text: 'Keller großes Ausmisten', category: 'jaehrlich' },
-    { text: 'Kleidung/Gegenstände spenden', category: 'jaehrlich' },
-
-    { text: 'Balkonpflanzen gießen', category: 'individuell', customDays: 3 },
-    { text: 'Fahrradkette ölen', category: 'individuell', customDays: 30 },
-
-    { text: 'Fahrrad reparieren (z.B. Reifen wechseln)', category: 'bedarf' },
-    { text: 'Flecken entfernen', category: 'bedarf' },
-    { text: 'Reparaturen durchführen', category: 'bedarf' },
-    { text: 'Second-Hand-Sachen/Kleiderspende wegbringen', category: 'bedarf' }
+    { id: "qnri6a9q4tms95ptvi", text: "Böden wischen", category: "zweiwoechentlich" },
+    { id: "8qt6zkopesgms95ptvi", text: "Wäsche waschen", category: "woechentlich" },
+    { id: "57o5t12yhv4ms95ptvi", text: "Backofen reinigen", category: "monatlich" },
+    { id: "l3rwxv4yhscms95ptvj", text: "Gelber Sack runter", category: "woechentlich" },
+    { id: "wnptqkxi0elms95ptvj", text: "Altpapier rausbringen", category: "zweiwoechentlich" },
+    { id: "hm70304omv7ms95ptvj", text: "Fenster putzen", category: "monatlich" },
+    { id: "tmaclvt8cqams95ptvj", text: "Vorratsschrank auf Haltbarkeit prüfen", category: "quartalsweise" },
+    { id: "mzcjpuz0tosms95ptvj", text: "Fahrrad-Reifendruck prüfen", category: "monatlich" },
+    { id: "olxn4wemplims95ptvj", text: "Gefrierfach abtauen", category: "quartalsweise" },
+    { id: "avqei3zidasms95ptvj", text: "Fahrräder warten", category: "quartalsweise" },
+    { id: "y1yxniiewddms8qsmnm", text: "Wäsche waschen", category: "individuell", customDays: 3 },
+    { id: "jngnj0sifkms8qsmnm", text: "Bettwäsche wechseln", category: "zweiwoechentlich" },
+    { id: "tsnmw5bi85bms8o6kby", text: "Bioabfall/Kompost leeren", category: "individuell", customDays: 2 },
+    { id: "inssq03bjxdms8o6kby", text: "Bad putzen", category: "woechentlich" },
+    { id: "ljbgach7ptmms8o6kby", text: "Wäsche waschen", category: "woechentlich" },
+    { id: "iaohfzivthms8o6kby", text: "Balkon putzen", category: "zweiwoechentlich" },
+    { id: "4vwfpcmg8toms8o6kby", text: "Müll rausstellen", category: "zweiwoechentlich", weekdays: ["Do","Mi"] },
+    { id: "3ho0p18573mms8o6kby", text: "Altpapier rausbringen", category: "woechentlich" },
+    { id: "0nn7xhdvo0xkms8o6kby", text: "Fahrrad-Reifendruck prüfen", category: "zweiwoechentlich" },
+    { id: "d9qr80ncentms8o6kby", text: "Balkonkästen düngen", category: "woechentlich" },
+    { id: "oi5mptz09ofms8o6kby", text: "Fahrräder zur Inspektion bringen", category: "jaehrlich" },
+    { id: "tnlsl60vu4nms8o6kby", text: "Kleider ausräumen", category: "jaehrlich" },
+    { id: "ip7ear0jkoms8oc4rh", text: "Spülmaschine laufen lassen", category: "taglich", childTemplates: [ { text: "Spülmaschine ausräumen", offsetDays: 0, children: [] } ] },
+    { id: "i294qtm0zxms8ocs0t", text: "Chai-Tee", category: "taglich" },
+    { id: "pl2kk67z6xms8ocyt1", text: "Frühstück", category: "taglich" },
+    { id: "gyahyobtw97ms8odb05", text: "Balkon gießen", category: "taglich" },
+    { id: "qmomm73fdkems8oduuv", text: "Kühlschrank putzen", category: "woechentlich" },
+    { id: "k45ssg7vwb7ms8ojldu", text: "Klo putzen", category: "individuell", customDays: 3 },
+    { id: "qjk304equfms8oju6h", text: "Dusche entkalten", category: "individuell", customDays: 3 },
+    { id: "dcye05cov9cms8okaep", text: "Waschbecken putzen", category: "individuell", customDays: 3 },
+    { id: "g3iu29lg9djms8okh4a", text: "Abstauben", category: "woechentlich" },
+    { id: "ysk95fqumums8oknwh", text: "Staubsaugen", category: "individuell", customDays: 3 },
+    { id: "09cvo7el3ox7ms8omzmi", text: "Steuer machen", category: "jaehrlich" },
+    { id: "taiy5jqmfqms8ooyhu", text: "Wäsche waschen", category: "individuell", customDays: 3, childTemplates: [ { text: "Wäsche aufhängen", offsetDays: 0, children: [ { text: "Wäsche abhängen", offsetDays: 2, children: [ { text: "Wäsche zusammenlegen", offsetDays: 0, children: [ { text: "Wäsche einräumen", offsetDays: 0, children: [] } ] } ] } ] } ] },
+    { id: "u7nb3wq7kams8opnu2", text: "Bett machen", category: "taglich" },
+    { id: "x261t1hfpbms8opz0j", text: "Wohnzimmer aufräumen", category: "taglich" },
+    { id: "ipihoy3yryms8oq47g", text: "Küche aufräumen", category: "taglich" },
+    { id: "3zmjdz8vl93ms8oq91w", text: "Schlafzimmer aufräumen", category: "taglich" },
+    { id: "ld2r9fvbums8oqb8c", text: "Bad aufräumen", category: "taglich" },
+    { id: "96yqkfw64lums8org63", text: "Spiegel putzen", category: "woechentlich" },
+    { id: "zz08ovwpyelms8orqgi", text: "Handtücher wechseln", category: "woechentlich" },
+    { id: "swaj0vttgtms8ostdu", text: "Deckenlampen putzen", category: "monatlich" },
+    { id: "h2gd8cm1j9ms8ot2bv", text: "Türrahmen/Türklinken putzen", category: "monatlich" },
+    { id: "0tvgpmd5en9msbtdo0j", text: "Secontique Kleider weg", category: "quartalsweise" },
+    { id: "9tza8ls43fmsbtdwbm", text: "Pfand wegbringen", category: "monatlich" },
+    { id: "sm3jgfpuclhmsbtfs3i", text: "UVPL", category: "woechentlich", weekdays: ["Do"], childTemplates: [ { text: "Sachen einräumen", offsetDays: 0, children: [] } ] },
+    { id: "s48zs1dj3bmsbtgcrs", text: "Markt", category: "woechentlich", weekdays: ["Mi","Sa"], childTemplates: [ { text: "Sachen einräumen ", offsetDays: 0, children: [] } ] },
+    { id: "w5b3lynhx6imsbtiftp", text: "Sekretär aufraumen", category: "monatlich" },
+    { id: "w5qxvafhtspmsbtiwop", text: "Schublade des Grauens", category: "zweiwoechentlich" },
+    { id: "tlqcca1moghmsbtjipm", text: "Kissen waschen", category: "monatlich" },
+    { id: "0rvn8xlzzo6msbtk04f", text: "Bettdecken etc waschen", category: "jaehrlich" },
+    { id: "0ac7ga3627sqmsbtl885", text: "Schuhe putzen", category: "monatlich" },
+    { id: "t8fv4hg0xvpmsbtmjc6", text: "Kleiderschrank ausputzen", category: "monatlich" },
+    { id: "ivlybnnakamsbtmvo8", text: "Küchenschubladen ausputzen", category: "quartalsweise" },
+    { id: "zpgq5vgpi4imsbtn62p", text: "Küchenschranke ausputzen", category: "quartalsweise" },
+    { id: "tgmobbwy85msbtney7", text: "Badschränke Rausputzen", category: "quartalsweise" },
+    { id: "n6m5p8y8dtmsbtnm98", text: "Waschmaschine putzen", category: "monatlich" },
+    { id: "w6isoqlxojfmsbto1gp", text: "Spülmaschine putzen", category: "woechentlich" },
+    { id: "li0y6is06vmsbtp3xd", text: "Spüle putzen", category: "woechentlich" },
+    { id: "93hr3qo5seamsbtq0bu", text: "Teppiche waschen", category: "monatlich" },
+    { id: "c5m9nym17damsbtr7ma", text: "Heizung putzen", category: "halbjaehrlich" },
+    { id: "30a3hd6b61hmsbtu5nl", text: "Messer schleifen", category: "quartalsweise" },
+    { id: "oxfm0cf2romsbtuvhm", text: "Zahnbürsten wechseln", category: "quartalsweise" },
+    { id: "grfwncfmg0dmsbtvnuw", text: "Geburtstage prüfen", category: "zweiwoechentlich" },
+    { id: "mat2wjc3u6lmsbtw10a", text: "Tisch ölen", category: "jaehrlich" },
+    { id: "2i1oo9d0ng4msbtyonj", text: "Fahrradlichter laden", category: "monatlich" },
+    { id: "mkv2k23dyprmsbtzm4f", text: "Keller putzen", category: "quartalsweise" },
+    { id: "6648bvzlssjms8o6kby", text: "Backofen reinigen", category: "monatlich" },
+    { id: "rg19iexgc0dms8o6kby", text: "Fenster putzen", category: "monatlich" },
+    { id: "1bw1nh5ywctms8o6kby", text: "Keller großes Ausmisten", category: "jaehrlich" }
   ];
 
   var STORAGE_KEY = 'household-tasks-v2';
+  var BASE_LIST_KEY = 'household-base-list-v1';
   var tasks = [];
   var activeView = 'faellig';
   var storageAvailable = true;
@@ -367,876 +410,4 @@
     return fromDate;
   }
 
-  function normalizeTask(t) {
-    var category = t.category || 'bedarf';
-    var archived = !!t.archived;
-    var nextDueDate = t.nextDueDate || null;
-    if (category === 'bedarf' && !nextDueDate && !archived) {
-      nextDueDate = startOfDay(new Date()).toISOString();
-    }
-    return {
-      id: t.id || uid(),
-      text: t.text || '',
-      category: category,
-      completed: !!t.completed,
-      nextDueDate: nextDueDate,
-      weekdays: t.weekdays || [],
-      customDays: t.customDays || null,
-      archived: archived,
-      archivedAt: t.archivedAt || null,
-      childTemplates: t.childTemplates || []
-    };
-  }
-
-  function buildDefaultTasks() {
-    return DEFAULT_TASKS.map(function (d) {
-      var due = null;
-      var freq = FREQUENCIES[d.category];
-      var isRecurring = (freq && freq.days) || (d.category === 'individuell' && d.customDays);
-      if (isRecurring) {
-        var dd = startOfDay(new Date());
-        if (d.weekdays && d.weekdays.length) dd = nextMatchingWeekday(dd, d.weekdays);
-        due = dd.toISOString();
-      } else if (d.category === 'bedarf') {
-        due = startOfDay(new Date()).toISOString();
-      }
-      return normalizeTask({
-        text: d.text,
-        category: d.category,
-        nextDueDate: due,
-        weekdays: d.weekdays || [],
-        customDays: d.customDays || null,
-        childTemplates: d.childTemplates || []
-      });
-    });
-  }
-
-  function setStatus(msg) {
-    var el = document.getElementById('statusMsg');
-    if (el) el.textContent = msg || '';
-  }
-
-  var RECOVERY_FLAG_KEY = 'household-recovery-2026-07-31-done';
-  var RECOVERY_TASKS = [
-    { "id": "i68ydzi4hzms8qsmnm", "text": "Böden wischen", "category": "woechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "y1yxniiewddms8qsmnm", "text": "Wäsche waschen", "category": "woechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "jngnj0sifkms8qsmnm", "text": "Bettwäsche wechseln", "category": "zweiwoechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "8mtkp26hyi4ms8qsmnm", "text": "Gelber Sack/Verpackungsmüll rausbringen", "category": "zweiwoechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "0hika8j35tcbms8qsmnm", "text": "Altpapier rausbringen", "category": "zweiwoechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "2i836zsd9ulms8qsmnm", "text": "Fenster putzen", "category": "monatlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "u56rlp4znhims8qsmnm", "text": "Vorratsschrank auf Haltbarkeit prüfen", "category": "monatlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "709bxd1kq23ms8qsmnm", "text": "Fahrrad-Reifendruck prüfen", "category": "monatlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "28cdwl7ey5jims8qsmnm", "text": "Balkonkästen düngen (organisch)", "category": "monatlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "s5dmsueq8pims8qsmnm", "text": "Kühlschrank/Gefrierfach abtauen und reinigen", "category": "quartalsweise", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "n8pw2mn8jakms8qsmnm", "text": "Fahrräder zur Inspektion bringen", "category": "jaehrlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "wdywrcq6vbnms8qsmnn", "text": "Fahrrad reparieren (z.B. Reifen wechseln)", "category": "bedarf", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "csq96f8yxhsms8qsmnn", "text": "Flecken entfernen", "category": "bedarf", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "kijb946yjgms8qsmnn", "text": "Reparaturen durchführen", "category": "bedarf", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "rp9ocp41m0ems8qsmnn", "text": "Second-Hand-Sachen/Kleiderspende wegbringen", "category": "bedarf", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "1dcz05s0bt5ms8o6kby", "text": "Küche kurz aufräumen", "category": "taglich", "nextDueDate": "2026-07-31T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "tsnmw5bi85bms8o6kby", "text": "Bioabfall/Kompost leeren", "category": "individuell", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": 2, "childTemplates": [] },
-    { "id": "inssq03bjxdms8o6kby", "text": "Bad putzen", "category": "woechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "l0og2acd3qsms8o6kby", "text": "Böden wischen", "category": "zweiwoechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "ljbgach7ptmms8o6kby", "text": "Wäsche waschen", "category": "woechentlich", "nextDueDate": "2026-08-06T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "iaohfzivthms8o6kby", "text": "Balkon putzen", "category": "zweiwoechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "15qlt8er70fms8o6kby", "text": "Bettwäsche wechseln", "category": "zweiwoechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "6648bvzlssjms8o6kby", "text": "Backofen reinigen", "category": "monatlich", "nextDueDate": "2026-08-06T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "4vwfpcmg8toms8o6kby", "text": "Gelber Sack", "category": "zweiwoechentlich", "nextDueDate": "2026-08-04T22:00:00.000Z", "weekdays": ["Do","Mi"], "customDays": null, "childTemplates": [] },
-    { "id": "3ho0p18573mms8o6kby", "text": "Altpapier rausbringen", "category": "woechentlich", "nextDueDate": "2026-08-06T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "rg19iexgc0dms8o6kby", "text": "Fenster putzen", "category": "monatlich", "nextDueDate": "2026-08-06T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "0nn7xhdvo0xkms8o6kby", "text": "Fahrrad-Reifendruck prüfen", "category": "zweiwoechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "d9qr80ncentms8o6kby", "text": "Balkonkästen düngen", "category": "woechentlich", "nextDueDate": "2026-08-06T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "oi5mptz09ofms8o6kby", "text": "Fahrräder zur Inspektion bringen", "category": "jaehrlich", "nextDueDate": "2026-09-28T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "1bw1nh5ywctms8o6kby", "text": "Keller großes Ausmisten", "category": "jaehrlich", "nextDueDate": "2026-12-27T23:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "tnlsl60vu4nms8o6kby", "text": "Kleidung/Gegenstände spenden", "category": "jaehrlich", "nextDueDate": "2026-09-28T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "5del9q24jcmms8o6kby", "text": "Fahrrad reparieren (z.B. Reifen wechseln)", "category": "bedarf", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "ip7ear0jkoms8oc4rh", "text": "Spülmaschine laufen lassen", "category": "taglich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [ { "text": "Spülmaschine ausräumen", "offsetDays": 0, "children": [] } ] },
-    { "id": "i294qtm0zxms8ocs0t", "text": "Chai-Tee", "category": "taglich", "nextDueDate": "2026-07-31T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "pl2kk67z6xms8ocyt1", "text": "Frühstück", "category": "taglich", "nextDueDate": "2026-07-31T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "gyahyobtw97ms8odb05", "text": "Balkon gießen", "category": "taglich", "nextDueDate": "2026-07-31T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "qmomm73fdkems8oduuv", "text": "Kühlschrank putzen", "category": "woechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "k45ssg7vwb7ms8ojldu", "text": "Klo putzen", "category": "individuell", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": 3, "childTemplates": [] },
-    { "id": "qjk304equfms8oju6h", "text": "Dusche entkalten", "category": "woechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "dcye05cov9cms8okaep", "text": "Waschbecken putzen", "category": "individuell", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": 3, "childTemplates": [] },
-    { "id": "g3iu29lg9djms8okh4a", "text": "Abstauben", "category": "woechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "ysk95fqumums8oknwh", "text": "Staubsaugen", "category": "individuell", "nextDueDate": "2026-07-31T22:00:00.000Z", "weekdays": [], "customDays": 3, "childTemplates": [] },
-    { "id": "09cvo7el3ox7ms8omzmi", "text": "Steuer machen", "category": "jaehrlich", "nextDueDate": "2027-03-31T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "taiy5jqmfqms8ooyhu", "text": "Wäsche waschen", "category": "individuell", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": 3, "childTemplates": [ { "text": "Wäsche aufhängen", "offsetDays": 0, "children": [ { "text": "Wäsche abhängen", "offsetDays": 2, "children": [ { "text": "Wäsche zusammenlegen", "offsetDays": 0, "children": [ { "text": "Wäsche einräumen", "offsetDays": 0, "children": [] } ] } ] } ] } ] },
-    { "id": "u7nb3wq7kams8opnu2", "text": "Bett machen", "category": "taglich", "nextDueDate": "2026-07-31T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "x261t1hfpbms8opz0j", "text": "Wohnzimmer aufräumen", "category": "taglich", "nextDueDate": "2026-07-31T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "ipihoy3yryms8oq47g", "text": "Küche aufräumen", "category": "taglich", "nextDueDate": "2026-07-31T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "3zmjdz8vl93ms8oq91w", "text": "Schlafzimmer aufräumen", "category": "taglich", "nextDueDate": "2026-07-31T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "ld2r9fvbums8oqb8c", "text": "Bad aufräumen", "category": "taglich", "nextDueDate": "2026-07-31T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "96yqkfw64lums8org63", "text": "Spiegel putzen", "category": "woechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "zz08ovwpyelms8orqgi", "text": "Handtücher wechseln", "category": "woechentlich", "nextDueDate": "2026-08-06T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "swaj0vttgtms8ostdu", "text": "Deckenlampen putzen", "category": "monatlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "h2gd8cm1j9ms8ot2bv", "text": "Türrahmen/Türklinken putzen", "category": "monatlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] }
-  ];
-
-  function loadTasks() {
-    var storageWorks = true;
-
-    // Schritt 1: bestehende Daten laden
-    try {
-      var raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        tasks = JSON.parse(raw).map(normalizeTask);
-      } else {
-        tasks = buildDefaultTasks();
-      }
-    } catch (err) {
-      storageWorks = false;
-      storageAvailable = false;
-      tasks = buildDefaultTasks();
-    }
-
-    // Schritt 2: bekannte Aufgaben ergänzen, falls hier noch nicht vorhanden (ID-basiert, kein Duplizieren) -
-    // wichtig beim allerersten Öffnen auf der neuen gehosteten Adresse
-    var recoveredAdded = 0;
-    try {
-      var existingIds = tasks.map(function (t) { return t.id; });
-      RECOVERY_TASKS.forEach(function (rt) {
-        if (existingIds.indexOf(rt.id) === -1) {
-          tasks.push(normalizeTask(rt));
-          recoveredAdded++;
-        }
-      });
-    } catch (e2) {
-      // falls hier etwas schiefgeht, bleiben die regulär geladenen Aufgaben trotzdem erhalten
-    }
-
-    // Schritt 3: speichern (falls möglich)
-    if (storageWorks) {
-      saveTasks();
-    }
-
-    // Sichtbare Diagnose, damit klar ist, was passiert ist
-    if (!storageWorks) {
-      setStatus('Speicherung nicht verfügbar in diesem Browser — es werden Standardaufgaben angezeigt, Änderungen bleiben nur temporär.');
-    } else if (recoveredAdded > 0) {
-      setStatus(recoveredAdded + ' Aufgabe(n) ergänzt. Insgesamt ' + tasks.length + ' Aufgaben geladen.');
-    } else {
-      setStatus('Geladen: ' + tasks.length + ' Aufgaben.');
-    }
-
-    renderAll();
-  }
-
-  function saveTasks() {
-    if (!storageAvailable) return;
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-    } catch (err) {
-      storageAvailable = false;
-      setStatus('Hinweis: Speicherung ist in diesem Browser nicht verfügbar — Änderungen bleiben nur, solange die Seite offen ist.');
-    }
-  }
-
-  function spawnChildren(parentTask, fromDate) {
-    (parentTask.childTemplates || []).forEach(function (node) {
-      var due = new Date(fromDate);
-      due.setDate(due.getDate() + (node.offsetDays || 0));
-      tasks.push(normalizeTask({
-        text: node.text,
-        category: 'bedarf',
-        nextDueDate: due.toISOString(),
-        childTemplates: node.children || []
-      }));
-    });
-  }
-
-  function toggleTask(id) {
-    var task = tasks.find(function (t) { return t.id === id; });
-    if (!task) return;
-
-    if (!task.completed) {
-      // wird gerade abgehakt
-      spawnChildren(task, new Date());
-
-      if (task.category === 'bedarf') {
-        task.completed = true;
-        task.archived = true;
-        task.archivedAt = new Date().toISOString();
-      } else {
-        var days = getFreqDays(task);
-        var next = startOfDay(new Date());
-        next.setDate(next.getDate() + (days || 0));
-        if (task.weekdays && task.weekdays.length) next = nextMatchingWeekday(next, task.weekdays);
-        task.nextDueDate = next.toISOString();
-        task.completed = false; // kehrt zyklisch zurück, taucht wieder auf wenn fällig
-      }
-    } else {
-      // Reaktivierung aus Bei-Bedarf-Archiv per Checkbox (Grenzfall)
-      if (task.category === 'bedarf') {
-        task.completed = false;
-        task.archived = false;
-        task.archivedAt = null;
-      } else {
-        task.completed = false;
-      }
-    }
-    saveTasks();
-    renderAll();
-  }
-
-  function setTaskCategory(id, newCategory, newCustomDays, newWeekdays, manualDueDate) {
-    var task = tasks.find(function (t) { return t.id === id; });
-    if (!task) return;
-    task.category = newCategory;
-    task.customDays = newCategory === 'individuell' ? (newCustomDays || 1) : null;
-    task.weekdays = newWeekdays || [];
-
-    if (manualDueDate) {
-      task.nextDueDate = manualDueDate;
-      task.archived = false;
-      task.archivedAt = null;
-      task.completed = false;
-    } else {
-      var freqDays = getFreqDays(task);
-      if (freqDays) {
-        var next = startOfDay(new Date());
-        if (task.weekdays && task.weekdays.length) next = nextMatchingWeekday(next, task.weekdays);
-        task.nextDueDate = next.toISOString();
-        task.archived = false;
-        task.archivedAt = null;
-        task.completed = false;
-      } else if (newCategory === 'bedarf' && !task.nextDueDate) {
-        task.nextDueDate = startOfDay(new Date()).toISOString();
-        task.archived = false;
-        task.archivedAt = null;
-        task.completed = false;
-      }
-    }
-    editingTaskId = null;
-    saveTasks();
-    renderAll();
-  }
-
-  function reactivateTask(id) {
-    var task = tasks.find(function (t) { return t.id === id; });
-    if (!task) return;
-    task.completed = false;
-    task.archived = false;
-    task.archivedAt = null;
-    saveTasks();
-    renderAll();
-  }
-
-  function renameTask(id, newText) {
-    var task = tasks.find(function (t) { return t.id === id; });
-    if (!task) return;
-    var trimmed = newText.trim();
-    if (trimmed) task.text = trimmed;
-    editingNameTaskId = null;
-    saveTasks();
-    renderAll();
-  }
-
-  function deleteTask(id) {
-    tasks = tasks.filter(function (t) { return t.id !== id; });
-    saveTasks();
-    renderAll();
-  }
-
-  function postponeTask(id, days) {
-    var task = tasks.find(function (t) { return t.id === id; });
-    if (!task) return;
-    var base = task.nextDueDate ? new Date(task.nextDueDate) : new Date();
-    var today = startOfDay(new Date());
-    if (base < today) base = today;
-    base.setDate(base.getDate() + days);
-    task.nextDueDate = base.toISOString();
-    saveTasks();
-    renderAll();
-  }
-
-  function setDueDate(id, isoDateOnly) {
-    var task = tasks.find(function (t) { return t.id === id; });
-    if (!task || !isoDateOnly) return;
-    task.nextDueDate = new Date(isoDateOnly + 'T00:00:00').toISOString();
-    saveTasks();
-    renderAll();
-  }
-
-  function addTask() {
-    var input = document.getElementById('newTaskInput');
-    var select = document.getElementById('newTaskFreq');
-    var dateInput = document.getElementById('newTaskDate');
-    var customDaysInput = document.getElementById('newTaskCustomDays');
-    var text = input.value.trim();
-    if (!text) return;
-
-    var category = select.value;
-    var freq = FREQUENCIES[category];
-    var customDays = category === 'individuell' ? (parseInt(customDaysInput.value, 10) || 1) : null;
-    var nextDueDate = null;
-
-    if (dateInput.value) {
-      nextDueDate = new Date(dateInput.value + 'T00:00:00').toISOString();
-    } else if (freq.days || (category === 'individuell' && customDays)) {
-      var dd = startOfDay(new Date());
-      if (selectedWeekdays.length) dd = nextMatchingWeekday(dd, selectedWeekdays);
-      nextDueDate = dd.toISOString();
-    } else if (category === 'bedarf') {
-      nextDueDate = startOfDay(new Date()).toISOString();
-    }
-
-    tasks.push(normalizeTask({
-      text: text,
-      category: category,
-      nextDueDate: nextDueDate,
-      weekdays: selectedWeekdays.slice(),
-      customDays: customDays,
-      childTemplates: cloneChainDraft(chainDraft)
-    }));
-
-    input.value = '';
-    dateInput.value = '';
-    customDaysInput.value = '';
-    customDaysInput.style.display = 'none';
-    selectedWeekdays = [];
-    chainDraft = [];
-    saveTasks();
-    renderWeekdayPicker();
-    renderChainEditor();
-    renderAll();
-  }
-
-  function cloneChainDraft(nodes) {
-    return nodes.map(function (n) {
-      return { text: n.text, offsetDays: n.offsetDays, children: cloneChainDraft(n.children || []) };
-    });
-  }
-
-  // ---- Chain editor (Trigger-Ketten beim Anlegen) ----
-  function findChainNode(nodes, path) {
-    var list = nodes;
-    var node = null;
-    for (var i = 0; i < path.length; i++) {
-      node = list[path[i]];
-      list = node.children;
-    }
-    return node;
-  }
-  function getChainList(nodes, path) {
-    var list = nodes;
-    for (var i = 0; i < path.length; i++) list = list[path[i]].children;
-    return list;
-  }
-
-  function renderChainEditor() {
-    var root = document.getElementById('chainRoot');
-    root.innerHTML = '';
-    function renderLevel(nodes, container, path, depth) {
-      nodes.forEach(function (node, idx) {
-        var currentPath = path.concat(idx);
-        var row = document.createElement('div');
-        row.className = 'chain-node';
-        row.style.marginLeft = (depth * 22) + 'px';
-
-        var textInput = document.createElement('input');
-        textInput.type = 'text';
-        textInput.placeholder = 'Folgeaufgabe, z.B. Wäsche aufhängen';
-        textInput.value = node.text;
-        textInput.addEventListener('input', function () { node.text = textInput.value; });
-
-        var offsetLabel = document.createElement('span');
-        offsetLabel.className = 'offset-label';
-        offsetLabel.textContent = 'fällig nach';
-
-        var offsetInput = document.createElement('input');
-        offsetInput.type = 'number';
-        offsetInput.min = '0';
-        offsetInput.value = node.offsetDays;
-        offsetInput.addEventListener('input', function () {
-          node.offsetDays = parseInt(offsetInput.value, 10) || 0;
-        });
-
-        var offsetLabel2 = document.createElement('span');
-        offsetLabel2.className = 'offset-label';
-        offsetLabel2.textContent = 'Tag(en)';
-
-        var addChildBtn = document.createElement('button');
-        addChildBtn.className = 'btn-add-child';
-        addChildBtn.textContent = '+ Folgeaufgabe';
-        addChildBtn.type = 'button';
-        addChildBtn.addEventListener('click', function () {
-          node.children.push({ text: '', offsetDays: 0, children: [] });
-          renderChainEditor();
-        });
-
-        var removeBtn = document.createElement('button');
-        removeBtn.className = 'btn-remove-node';
-        removeBtn.textContent = 'Entfernen';
-        removeBtn.type = 'button';
-        removeBtn.addEventListener('click', function () {
-          var list = getChainList(chainDraft, path);
-          list.splice(idx, 1);
-          renderChainEditor();
-        });
-
-        row.appendChild(textInput);
-        row.appendChild(offsetLabel);
-        row.appendChild(offsetInput);
-        row.appendChild(offsetLabel2);
-        row.appendChild(addChildBtn);
-        row.appendChild(removeBtn);
-        container.appendChild(row);
-
-        if (node.children && node.children.length) {
-          renderLevel(node.children, container, currentPath, depth + 1);
-        }
-      });
-    }
-    renderLevel(chainDraft, root, [], 0);
-  }
-
-  document.getElementById('addRootTrigger').addEventListener('click', function () {
-    chainDraft.push({ text: '', offsetDays: 0, children: [] });
-    renderChainEditor();
-  });
-
-  // ---- Weekday picker (Add-Task-Formular) ----
-  function renderWeekdayPicker() {
-    var picker = document.getElementById('weekdayPicker');
-    picker.innerHTML = '';
-    WEEKDAYS.forEach(function (wd) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'weekday-btn' + (selectedWeekdays.indexOf(wd) !== -1 ? ' selected' : '');
-      btn.textContent = wd;
-      btn.addEventListener('click', function () {
-        var i = selectedWeekdays.indexOf(wd);
-        if (i === -1) selectedWeekdays.push(wd); else selectedWeekdays.splice(i, 1);
-        renderWeekdayPicker();
-      });
-      picker.appendChild(btn);
-    });
-  }
-
-  function populateFreqSelect() {
-    var select = document.getElementById('newTaskFreq');
-    select.innerHTML = '';
-    FREQ_ORDER.forEach(function (key) {
-      var opt = document.createElement('option');
-      opt.value = key;
-      opt.textContent = FREQUENCIES[key].label;
-      if (key === 'woechentlich') opt.selected = true;
-      select.appendChild(opt);
-    });
-    select.addEventListener('change', function () {
-      var customDaysInput = document.getElementById('newTaskCustomDays');
-      customDaysInput.style.display = select.value === 'individuell' ? 'block' : 'none';
-    });
-  }
-
-  // ---- Formatierung ----
-  function toDateInputValue(iso) {
-    if (!iso) return '';
-    var d = new Date(iso);
-    var y = d.getFullYear();
-    var m = String(d.getMonth() + 1).padStart(2, '0');
-    var day = String(d.getDate()).padStart(2, '0');
-    return y + '-' + m + '-' + day;
-  }
-
-  function formatDate(iso) {
-    if (!iso) return '';
-    var d = new Date(iso);
-    return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-  }
-
-  function isOverdue(task) {
-    if (!task.nextDueDate || task.completed) return false;
-    return startOfDay(task.nextDueDate) < startOfDay(new Date());
-  }
-  function isDueToday(task) {
-    if (!task.nextDueDate || task.completed) return false;
-    return startOfDay(task.nextDueDate).getTime() === startOfDay(new Date()).getTime();
-  }
-
-  // ---- Rendering Tabs & Listen ----
-  function renderTabs() {
-    var tabsEl = document.getElementById('tabs');
-    tabsEl.innerHTML = '';
-
-    var faelligBtn = document.createElement('button');
-    faelligBtn.className = 'tab-button faellig-tab' + (activeView === 'faellig' ? ' active' : '');
-    faelligBtn.textContent = '⏰ Fällig heute';
-    faelligBtn.addEventListener('click', function () { activeView = 'faellig'; renderAll(); });
-    tabsEl.appendChild(faelligBtn);
-
-    FREQ_ORDER.forEach(function (key) {
-      var count = tasks.filter(function (t) { return t.category === key && !t.archived; }).length;
-      var btn = document.createElement('button');
-      btn.className = 'tab-button' + (activeView === key ? ' active' : '');
-      btn.textContent = FREQUENCIES[key].label + ' (' + count + ')';
-      btn.addEventListener('click', function () { activeView = key; renderAll(); });
-      tabsEl.appendChild(btn);
-    });
-
-    var archivCount = tasks.filter(function (t) { return t.archived; }).length;
-    var archivBtn = document.createElement('button');
-    archivBtn.className = 'tab-button' + (activeView === 'archiv' ? ' active' : '');
-    archivBtn.textContent = '📦 Archiv (' + archivCount + ')';
-    archivBtn.addEventListener('click', function () { activeView = 'archiv'; renderAll(); });
-    tabsEl.appendChild(archivBtn);
-  }
-
-  function makeTaskRow(task, opts) {
-    opts = opts || {};
-    var overdue = isOverdue(task);
-    var item = document.createElement('div');
-    item.className = 'task-item' + (task.completed ? ' completed' : '') + (overdue ? ' overdue' : '');
-
-    if (!opts.readOnly) {
-      var checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.checked = task.completed;
-      checkbox.addEventListener('change', function () { toggleTask(task.id); });
-      item.appendChild(checkbox);
-    }
-
-    var main = document.createElement('div');
-    main.className = 'task-main';
-
-    if (editingNameTaskId === task.id) {
-      var nameEditBox = document.createElement('div');
-      nameEditBox.style.display = 'flex';
-      nameEditBox.style.gap = '6px';
-      nameEditBox.style.flexWrap = 'wrap';
-
-      var nameInput = document.createElement('input');
-      nameInput.type = 'text';
-      nameInput.value = task.text;
-      nameInput.style.flex = '1';
-      nameInput.style.minWidth = '140px';
-      nameInput.style.padding = '6px';
-      nameInput.style.border = '1px solid #ddd';
-      nameInput.style.borderRadius = '6px';
-      nameInput.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') renameTask(task.id, nameInput.value);
-      });
-
-      var saveNameBtn = document.createElement('button');
-      saveNameBtn.className = 'action-btn btn-postpone';
-      saveNameBtn.textContent = 'Speichern';
-      saveNameBtn.addEventListener('click', function () { renameTask(task.id, nameInput.value); });
-
-      var cancelNameBtn = document.createElement('button');
-      cancelNameBtn.className = 'action-btn btn-delete';
-      cancelNameBtn.textContent = 'Abbrechen';
-      cancelNameBtn.addEventListener('click', function () { editingNameTaskId = null; renderAll(); });
-
-      nameEditBox.appendChild(nameInput);
-      nameEditBox.appendChild(saveNameBtn);
-      nameEditBox.appendChild(cancelNameBtn);
-      main.appendChild(nameEditBox);
-    } else {
-      var title = document.createElement('div');
-      title.className = 'task-title';
-      title.textContent = task.text;
-      title.style.cursor = 'pointer';
-      title.title = 'Klicken, um den Namen zu ändern';
-      title.addEventListener('click', function () {
-        editingNameTaskId = task.id;
-        renderAll();
-      });
-      main.appendChild(title);
-    }
-
-    var meta = document.createElement('div');
-    meta.className = 'task-meta';
-    if (task.archived && task.archivedAt) {
-      var doneSpan = document.createElement('span');
-      doneSpan.textContent = 'Erledigt am ' + formatDate(task.archivedAt);
-      meta.appendChild(doneSpan);
-    } else if (task.nextDueDate) {
-      var dueSpan = document.createElement('span');
-      if (overdue) {
-        dueSpan.className = 'overdue-text';
-        dueSpan.textContent = 'Überfällig seit ' + formatDate(task.nextDueDate);
-      } else {
-        dueSpan.textContent = 'Fällig: ' + formatDate(task.nextDueDate);
-      }
-      meta.appendChild(dueSpan);
-    } else if (task.category === 'bedarf') {
-      var noDate = document.createElement('span');
-      noDate.textContent = 'Kein Termin gesetzt';
-      meta.appendChild(noDate);
-    }
-    if (task.weekdays && task.weekdays.length) {
-      var wdSpan = document.createElement('span');
-      wdSpan.textContent = '📅 ' + task.weekdays.join('/');
-      meta.appendChild(wdSpan);
-    }
-    main.appendChild(meta);
-    item.appendChild(main);
-
-    if (editingTaskId === task.id) {
-      var editBox = document.createElement('div');
-      editBox.style.display = 'flex';
-      editBox.style.gap = '6px';
-      editBox.style.alignItems = 'center';
-      editBox.style.flexWrap = 'wrap';
-
-      var editSelect = document.createElement('select');
-      FREQ_ORDER.forEach(function (key) {
-        var opt = document.createElement('option');
-        opt.value = key;
-        opt.textContent = FREQUENCIES[key].label;
-        if (key === task.category) opt.selected = true;
-        editSelect.appendChild(opt);
-      });
-
-      var editCustomDays = document.createElement('input');
-      editCustomDays.type = 'number';
-      editCustomDays.min = '1';
-      editCustomDays.style.width = '70px';
-      editCustomDays.placeholder = 'alle X Tage';
-      editCustomDays.value = task.customDays || '';
-      editCustomDays.style.display = task.category === 'individuell' ? 'inline-block' : 'none';
-
-      editSelect.addEventListener('change', function () {
-        editCustomDays.style.display = editSelect.value === 'individuell' ? 'inline-block' : 'none';
-      });
-
-      var editWeekdays = (task.weekdays || []).slice();
-      var editWeekdayBox = document.createElement('div');
-      editWeekdayBox.style.display = 'flex';
-      editWeekdayBox.style.gap = '4px';
-      editWeekdayBox.style.flexWrap = 'wrap';
-      WEEKDAYS.forEach(function (wd) {
-        var wdBtn = document.createElement('button');
-        wdBtn.type = 'button';
-        wdBtn.className = 'weekday-btn' + (editWeekdays.indexOf(wd) !== -1 ? ' selected' : '');
-        wdBtn.textContent = wd;
-        wdBtn.addEventListener('click', function () {
-          var i = editWeekdays.indexOf(wd);
-          if (i === -1) editWeekdays.push(wd); else editWeekdays.splice(i, 1);
-          wdBtn.className = 'weekday-btn' + (editWeekdays.indexOf(wd) !== -1 ? ' selected' : '');
-        });
-        editWeekdayBox.appendChild(wdBtn);
-      });
-
-      var editDueDate = document.createElement('input');
-      editDueDate.type = 'date';
-      editDueDate.title = 'Fälligkeit manuell setzen';
-      editDueDate.value = toDateInputValue(task.nextDueDate);
-
-      var saveEditBtn = document.createElement('button');
-      saveEditBtn.className = 'action-btn btn-postpone';
-      saveEditBtn.textContent = 'Speichern';
-      saveEditBtn.addEventListener('click', function () {
-        var newCustomDays = parseInt(editCustomDays.value, 10) || 1;
-        var manualDueDate = editDueDate.value ? new Date(editDueDate.value + 'T00:00:00').toISOString() : null;
-        setTaskCategory(task.id, editSelect.value, newCustomDays, editWeekdays, manualDueDate);
-      });
-
-      var cancelEditBtn = document.createElement('button');
-      cancelEditBtn.className = 'action-btn btn-delete';
-      cancelEditBtn.textContent = 'Abbrechen';
-      cancelEditBtn.addEventListener('click', function () {
-        editingTaskId = null;
-        renderAll();
-      });
-
-      editBox.appendChild(editSelect);
-      editBox.appendChild(editCustomDays);
-      editBox.appendChild(editWeekdayBox);
-      editBox.appendChild(editDueDate);
-      editBox.appendChild(saveEditBtn);
-      editBox.appendChild(cancelEditBtn);
-      item.appendChild(editBox);
-      return item;
-    }
-
-    var badge = document.createElement('span');
-    badge.className = 'task-badge ' + FREQUENCIES[task.category].badge;
-    badge.style.cursor = 'pointer';
-    badge.title = 'Klicken, um Zyklus zu ändern';
-    badge.textContent = (task.category === 'individuell' && task.customDays)
-      ? 'Alle ' + task.customDays + ' Tage'
-      : FREQUENCIES[task.category].label;
-    badge.addEventListener('click', function () {
-      editingTaskId = task.id;
-      renderAll();
-    });
-    item.appendChild(badge);
-
-    var actions = document.createElement('div');
-    actions.className = 'task-actions';
-
-    if (task.archived) {
-      var reactBtn = document.createElement('button');
-      reactBtn.className = 'action-btn btn-reactivate';
-      reactBtn.textContent = 'Reaktivieren';
-      reactBtn.addEventListener('click', function () { reactivateTask(task.id); });
-      actions.appendChild(reactBtn);
-    } else {
-      var postponeDayBtn = document.createElement('button');
-      postponeDayBtn.className = 'action-btn btn-postpone';
-      postponeDayBtn.textContent = '+1 Tag';
-      postponeDayBtn.addEventListener('click', function () { postponeTask(task.id, 1); });
-      actions.appendChild(postponeDayBtn);
-
-      var postponeBtn = document.createElement('button');
-      postponeBtn.className = 'action-btn btn-postpone';
-      postponeBtn.textContent = '+1 Woche';
-      postponeBtn.addEventListener('click', function () { postponeTask(task.id, 7); });
-      actions.appendChild(postponeBtn);
-
-      var customInput = document.createElement('input');
-      customInput.type = 'number';
-      customInput.className = 'btn-postpone-custom';
-      customInput.placeholder = 'Tage';
-      customInput.min = '1';
-      actions.appendChild(customInput);
-
-      var customBtn = document.createElement('button');
-      customBtn.className = 'action-btn btn-postpone';
-      customBtn.textContent = 'Verschieben';
-      customBtn.addEventListener('click', function () {
-        var n = parseInt(customInput.value, 10);
-        if (n > 0) postponeTask(task.id, n);
-      });
-      actions.appendChild(customBtn);
-
-      var dueDateInput = document.createElement('input');
-      dueDateInput.type = 'date';
-      dueDateInput.className = 'btn-postpone-custom';
-      dueDateInput.style.width = '128px';
-      if (task.nextDueDate) {
-        dueDateInput.value = new Date(task.nextDueDate).toISOString().slice(0, 10);
-      }
-      actions.appendChild(dueDateInput);
-
-      var setDueBtn = document.createElement('button');
-      setDueBtn.className = 'action-btn btn-postpone';
-      setDueBtn.textContent = 'Fälligkeit setzen';
-      setDueBtn.addEventListener('click', function () {
-        setDueDate(task.id, dueDateInput.value);
-      });
-      actions.appendChild(setDueBtn);
-    }
-
-    var delBtn = document.createElement('button');
-    delBtn.className = 'action-btn btn-delete';
-    delBtn.textContent = 'Löschen';
-    delBtn.addEventListener('click', function () { deleteTask(task.id); });
-    actions.appendChild(delBtn);
-
-    item.appendChild(actions);
-    return item;
-  }
-
-  function renderLists() {
-    var container = document.getElementById('taskLists');
-    container.innerHTML = '';
-
-    // Fällig-heute-Ansicht
-    var faelligDiv = document.createElement('div');
-    faelligDiv.className = 'task-list' + (activeView === 'faellig' ? ' active' : '');
-    var faelligTasks = tasks.filter(function (t) {
-      return !t.archived && !t.completed && t.nextDueDate && (isDueToday(t) || isOverdue(t));
-    });
-    faelligTasks.sort(function (a, b) {
-      return FREQ_ORDER.indexOf(a.category) - FREQ_ORDER.indexOf(b.category);
-    });
-    if (faelligTasks.length === 0) {
-      var empty = document.createElement('div');
-      empty.className = 'empty-state';
-      empty.innerHTML = '<div class="empty-state-icon">✓</div><p>Heute nichts fällig oder überfällig – gut gemacht!</p>';
-      faelligDiv.appendChild(empty);
-    } else {
-      var lastCategory = null;
-      faelligTasks.forEach(function (task) {
-        if (task.category !== lastCategory) {
-          var label = document.createElement('div');
-          label.className = 'category-group-label';
-          label.textContent = FREQUENCIES[task.category].label;
-          faelligDiv.appendChild(label);
-          lastCategory = task.category;
-        }
-        faelligDiv.appendChild(makeTaskRow(task));
-      });
-    }
-    container.appendChild(faelligDiv);
-
-    // Kategorie-Tabs
-    FREQ_ORDER.forEach(function (key) {
-      var listDiv = document.createElement('div');
-      listDiv.className = 'task-list' + (activeView === key ? ' active' : '');
-      var catTasks = tasks.filter(function (t) { return t.category === key && !t.archived; });
-      if (catTasks.length === 0) {
-        var e = document.createElement('div');
-        e.className = 'empty-state';
-        e.innerHTML = '<div class="empty-state-icon">✓</div><p>Keine Aufgaben in dieser Kategorie</p>';
-        listDiv.appendChild(e);
-      } else {
-        catTasks.forEach(function (task) { listDiv.appendChild(makeTaskRow(task)); });
-      }
-      container.appendChild(listDiv);
-    });
-
-    // Archiv
-    var archivDiv = document.createElement('div');
-    archivDiv.className = 'task-list' + (activeView === 'archiv' ? ' active' : '');
-    var archivTasks = tasks.filter(function (t) { return t.archived; })
-      .sort(function (a, b) { return new Date(b.archivedAt) - new Date(a.archivedAt); });
-    if (archivTasks.length === 0) {
-      var e2 = document.createElement('div');
-      e2.className = 'empty-state';
-      e2.innerHTML = '<div class="empty-state-icon">📦</div><p>Noch keine erledigten Bei-Bedarf-Aufgaben</p>';
-      archivDiv.appendChild(e2);
-    } else {
-      archivTasks.forEach(function (task) { archivDiv.appendChild(makeTaskRow(task, { readOnly: true })); });
-    }
-    container.appendChild(archivDiv);
-  }
-
-  function renderAll() {
-    renderTabs();
-    renderLists();
-  }
-
-  document.getElementById('addTaskBtn').addEventListener('click', addTask);
-
-  document.getElementById('exportBtn').addEventListener('click', function () {
-    var box = document.getElementById('transferBox');
-    box.value = JSON.stringify(tasks, null, 2);
-    box.focus();
-    box.select();
-  });
-
-  document.getElementById('importBtn').addEventListener('click', function () {
-    var box = document.getElementById('transferBox');
-    var raw = box.value.trim();
-    if (!raw) { setStatus('Bitte zuerst Daten ins Textfeld einfügen.'); return; }
-    var parsed;
-    try {
-      parsed = JSON.parse(raw);
-      if (!Array.isArray(parsed)) throw new Error('kein Array');
-    } catch (err) {
-      setStatus('Fehler: Das sieht nicht nach gültig exportierten Daten aus.');
-      return;
-    }
-    if (!confirm('Aktuelle Liste (' + tasks.length + ' Aufgaben) durch importierte Liste (' + parsed.length + ' Aufgaben) ersetzen?')) return;
-    tasks = parsed.map(normalizeTask);
-    saveTasks();
-    renderAll();
-    setStatus('Import erfolgreich – ' + tasks.length + ' Aufgaben übernommen.');
-  });
-
-  document.getElementById('newTaskInput').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') addTask();
-  });
-
-  populateFreqSelect();
-  renderWeekdayPicker();
-  renderChainEditor();
-  loadTasks();
-})();
-</script>
-</body>
-</html>
+  function normalizeTas
