@@ -416,106 +416,6 @@
     if (el) el.textContent = msg || '';
   }
 
-  var RECOVERY_TASKS = [
-    { "id": "qnri6a9q4tms95ptvi", "text": "Böden wischen", "category": "zweiwoechentlich", "nextDueDate": "2026-08-08T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "8qt6zkopesgms95ptvi", "text": "Wäsche waschen", "category": "woechentlich", "nextDueDate": "2026-08-08T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "57o5t12yhv4ms95ptvi", "text": "Backofen reinigen", "category": "monatlich", "nextDueDate": "2026-08-08T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "wnptqkxi0elms95ptvj", "text": "Altpapier rausbringen", "category": "zweiwoechentlich", "nextDueDate": "2026-08-08T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "hm70304omv7ms95ptvj", "text": "Fenster putzen", "category": "monatlich", "nextDueDate": "2026-08-08T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "tmaclvt8cqams95ptvj", "text": "Vorratsschrank auf Haltbarkeit prüfen", "category": "quartalsweise", "nextDueDate": "2026-08-19T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "mzcjpuz0tosms95ptvj", "text": "Fahrrad-Reifendruck prüfen", "category": "monatlich", "nextDueDate": "2026-08-14T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "i68ydzi4hzms8qsmnm", "text": "Böden wischen", "category": "woechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "y1yxniiewddms8qsmnm", "text": "Wäsche waschen", "category": "individuell", "nextDueDate": "2026-08-03T22:00:00.000Z", "weekdays": [], "customDays": 3, "childTemplates": [] },
-    { "id": "jngnj0sifkms8qsmnm", "text": "Bettwäsche wechseln", "category": "zweiwoechentlich", "nextDueDate": "2026-08-08T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "8mtkp26hyi4ms8qsmnm", "text": "Gelber Sack/Verpackungsmüll rausbringen", "category": "zweiwoechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "0hika8j35tcbms8qsmnm", "text": "Altpapier rausbringen", "category": "zweiwoechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "2i836zsd9ulms8qsmnm", "text": "Fenster putzen", "category": "monatlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "u56rlp4znhims8qsmnm", "text": "Vorratsschrank auf Haltbarkeit prüfen", "category": "quartalsweise", "nextDueDate": "2026-08-19T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "709bxd1kq23ms8qsmnm", "text": "Fahrrad-Reifendruck prüfen", "category": "monatlich", "nextDueDate": "2026-08-14T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "28cdwl7ey5jims8qsmnm", "text": "Balkonkästen düngen (organisch)", "category": "monatlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "s5dmsueq8pims8qsmnm", "text": "Kühlschrank/Gefrierfach abtauen und reinigen", "category": "quartalsweise", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "n8pw2mn8jakms8qsmnm", "text": "Fahrräder zur Inspektion bringen", "category": "jaehrlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "wdywrcq6vbnms8qsmnn", "text": "Fahrrad reparieren (z.B. Reifen wechseln)", "category": "bedarf", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "csq96f8yxhsms8qsmnn", "text": "Flecken entfernen", "category": "bedarf", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "kijb946yjgms8qsmnn", "text": "Reparaturen durchführen", "category": "bedarf", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "rp9ocp41m0ems8qsmnn", "text": "Second-Hand-Sachen/Kleiderspende wegbringen", "category": "bedarf", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "kxtumwol46ms95ptvj", "text": "Fahrrad reparieren", "category": "bedarf", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "l3rwxv4yhscms95ptvj", "text": "Gelber Sack runter", "category": "woechentlich", "nextDueDate": "2026-08-08T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "olxn4wemplims95ptvj", "text": "Gefrierfach abtauen", "category": "quartalsweise", "nextDueDate": "2026-08-31T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "avqei3zidasms95ptvj", "text": "Fahrräder warten", "category": "quartalsweise", "nextDueDate": "2026-08-29T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "1dcz05s0bt5ms8o6kby", "text": "Küche kurz aufräumen", "category": "taglich", "nextDueDate": "2026-07-31T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "tsnmw5bi85bms8o6kby", "text": "Bioabfall/Kompost leeren", "category": "individuell", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": 2, "childTemplates": [] },
-    { "id": "inssq03bjxdms8o6kby", "text": "Bad putzen", "category": "woechentlich", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "l0og2acd3qsms8o6kby", "text": "Böden wischen", "category": "zweiwoechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "ljbgach7ptmms8o6kby", "text": "Wäsche waschen", "category": "woechentlich", "nextDueDate": "2026-08-06T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "iaohfzivthms8o6kby", "text": "Balkon putzen", "category": "zweiwoechentlich", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "15qlt8er70fms8o6kby", "text": "Bettwäsche wechseln", "category": "zweiwoechentlich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "6648bvzlssjms8o6kby", "text": "Backofen reinigen", "category": "monatlich", "nextDueDate": "2026-08-06T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "4vwfpcmg8toms8o6kby", "text": "Müll rausstellen", "category": "zweiwoechentlich", "nextDueDate": "2026-08-04T22:00:00.000Z", "weekdays": ["Do","Mi"], "customDays": null, "childTemplates": [] },
-    { "id": "3ho0p18573mms8o6kby", "text": "Altpapier rausbringen", "category": "woechentlich", "nextDueDate": "2026-08-06T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "rg19iexgc0dms8o6kby", "text": "Fenster putzen", "category": "monatlich", "nextDueDate": "2026-08-06T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "0nn7xhdvo0xkms8o6kby", "text": "Fahrrad-Reifendruck prüfen", "category": "zweiwoechentlich", "nextDueDate": "2026-08-09T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "d9qr80ncentms8o6kby", "text": "Balkonkästen düngen", "category": "woechentlich", "nextDueDate": "2026-08-06T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "oi5mptz09ofms8o6kby", "text": "Fahrräder zur Inspektion bringen", "category": "jaehrlich", "nextDueDate": "2026-09-28T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "1bw1nh5ywctms8o6kby", "text": "Keller großes Ausmisten", "category": "jaehrlich", "nextDueDate": "2026-12-27T23:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "tnlsl60vu4nms8o6kby", "text": "Kleider ausräumen", "category": "jaehrlich", "nextDueDate": "2026-10-31T23:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "5del9q24jcmms8o6kby", "text": "Fahrrad reparieren (z.B. Reifen wechseln)", "category": "bedarf", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "ip7ear0jkoms8oc4rh", "text": "Spülmaschine laufen lassen", "category": "taglich", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [ { "text": "Spülmaschine ausräumen", "offsetDays": 0, "children": [] } ] },
-    { "id": "i294qtm0zxms8ocs0t", "text": "Chai-Tee", "category": "taglich", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "pl2kk67z6xms8ocyt1", "text": "Frühstück", "category": "taglich", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "gyahyobtw97ms8odb05", "text": "Balkon gießen", "category": "taglich", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "qmomm73fdkems8oduuv", "text": "Kühlschrank putzen", "category": "woechentlich", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "k45ssg7vwb7ms8ojldu", "text": "Klo putzen", "category": "individuell", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": 3, "childTemplates": [] },
-    { "id": "qjk304equfms8oju6h", "text": "Dusche entkalten", "category": "individuell", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": 3, "childTemplates": [] },
-    { "id": "dcye05cov9cms8okaep", "text": "Waschbecken putzen", "category": "individuell", "nextDueDate": "2026-07-30T22:00:00.000Z", "weekdays": [], "customDays": 3, "childTemplates": [] },
-    { "id": "g3iu29lg9djms8okh4a", "text": "Abstauben", "category": "woechentlich", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "ysk95fqumums8oknwh", "text": "Staubsaugen", "category": "individuell", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": 3, "childTemplates": [] },
-    { "id": "09cvo7el3ox7ms8omzmi", "text": "Steuer machen", "category": "jaehrlich", "nextDueDate": "2027-03-31T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "taiy5jqmfqms8ooyhu", "text": "Wäsche waschen", "category": "individuell", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": 3, "childTemplates": [ { "text": "Wäsche aufhängen", "offsetDays": 0, "children": [ { "text": "Wäsche abhängen", "offsetDays": 2, "children": [ { "text": "Wäsche zusammenlegen", "offsetDays": 0, "children": [ { "text": "Wäsche einräumen", "offsetDays": 0, "children": [] } ] } ] } ] } ] },
-    { "id": "u7nb3wq7kams8opnu2", "text": "Bett machen", "category": "taglich", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "x261t1hfpbms8opz0j", "text": "Wohnzimmer aufräumen", "category": "taglich", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "ipihoy3yryms8oq47g", "text": "Küche aufräumen", "category": "taglich", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "3zmjdz8vl93ms8oq91w", "text": "Schlafzimmer aufräumen", "category": "taglich", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "ld2r9fvbums8oqb8c", "text": "Bad aufräumen", "category": "taglich", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "96yqkfw64lums8org63", "text": "Spiegel putzen", "category": "woechentlich", "nextDueDate": "2026-08-02T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "zz08ovwpyelms8orqgi", "text": "Handtücher wechseln", "category": "woechentlich", "nextDueDate": "2026-08-06T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "swaj0vttgtms8ostdu", "text": "Deckenlampen putzen", "category": "monatlich", "nextDueDate": "2026-08-08T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "h2gd8cm1j9ms8ot2bv", "text": "Türrahmen/Türklinken putzen", "category": "monatlich", "nextDueDate": "2026-08-08T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "ggu33lok7rmsbt742c", "text": "Objektivversicherung kündigen", "category": "bedarf", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "3frr15rph0vmsbtblvh", "text": "Arne schreiben wegen Just People", "category": "bedarf", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "1wotjr5la94msbtcde3", "text": "Amberg schreiben", "category": "bedarf", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "ip4xnvla5b9msbtcvmb", "text": "Schlossle 15.09.19:00", "category": "bedarf", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "xmuxpd19mcamsbtd3cv", "text": "Schuhe Brigitte versorgen", "category": "bedarf", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "0tvgpmd5en9msbtdo0j", "text": "Secontique Kleider weg", "category": "quartalsweise", "nextDueDate": "2026-08-30T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "9tza8ls43fmsbtdwbm", "text": "Pfand wegbringen", "category": "monatlich", "nextDueDate": "2026-08-29T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "lt7ept81scmsbteepl", "text": "Laya wegen Hannah von Ole fragen", "category": "bedarf", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "4ffo5vv4gnsmsbtesx1", "text": "Brigittes Adresse anlegen", "category": "bedarf", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "sm3jgfpuclhmsbtfs3i", "text": "UVPL", "category": "woechentlich", "nextDueDate": "2026-08-05T22:00:00.000Z", "weekdays": ["Do"], "customDays": null, "childTemplates": [ { "text": "Sachen einräumen", "offsetDays": 0, "children": [] } ] },
-    { "id": "s48zs1dj3bmsbtgcrs", "text": "Markt", "category": "woechentlich", "nextDueDate": "2026-08-04T22:00:00.000Z", "weekdays": ["Mi","Sa"], "customDays": null, "childTemplates": [ { "text": "Sachen einräumen ", "offsetDays": 0, "children": [] } ] },
-    { "id": "w5b3lynhx6imsbtiftp", "text": "Sekretär aufraumen", "category": "monatlich", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "w5qxvafhtspmsbtiwop", "text": "Schublade des Grauens", "category": "zweiwoechentlich", "nextDueDate": "2026-08-08T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "tlqcca1moghmsbtjipm", "text": "Kissen waschen", "category": "monatlich", "nextDueDate": "2026-08-05T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "0rvn8xlzzo6msbtk04f", "text": "Bettdecken etc waschen", "category": "jaehrlich", "nextDueDate": "2026-11-18T23:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "hdurc5qjrpwmsbtktgz", "text": "Schuhschrank reparieren", "category": "bedarf", "nextDueDate": "2026-08-08T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "0ac7ga3627sqmsbtl885", "text": "Schuhe putzen", "category": "monatlich", "nextDueDate": "2026-08-15T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "z13kri2abxmsbtlgs6", "text": "Romys Schuhe abholen", "category": "bedarf", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": ["Mi"], "customDays": null, "childTemplates": [] },
-    { "id": "dyplvtynlilmsbtlmsf", "text": "Meine Schuhe wegbringen", "category": "bedarf", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": ["Mi"], "customDays": null, "childTemplates": [] },
-    { "id": "t8fv4hg0xvpmsbtmjc6", "text": "Kleiderschrank ausputzen", "category": "monatlich", "nextDueDate": "2026-08-08T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "ivlybnnakamsbtmvo8", "text": "Küchenschubladen ausputzen", "category": "quartalsweise", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "zpgq5vgpi4imsbtn62p", "text": "Küchenschranke ausputzen", "category": "quartalsweise", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "tgmobbwy85msbtney7", "text": "Badschränke Rausputzen", "category": "quartalsweise", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "n6m5p8y8dtmsbtnm98", "text": "Waschmaschine putzen", "category": "monatlich", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "w6isoqlxojfmsbto1gp", "text": "Spülmaschine putzen", "category": "woechentlich", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "li0y6is06vmsbtp3xd", "text": "Spüle putzen", "category": "woechentlich", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "93hr3qo5seamsbtq0bu", "text": "Teppiche waschen", "category": "monatlich", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "c5m9nym17damsbtr7ma", "text": "Heizung putzen", "category": "halbjaehrlich", "nextDueDate": "2026-09-29T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "30a3hd6b61hmsbtu5nl", "text": "Messer schleifen", "category": "quartalsweise", "nextDueDate": "2026-10-31T23:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "oxfm0cf2romsbtuvhm", "text": "Zahnbürsten wechseln", "category": "quartalsweise", "nextDueDate": "2026-10-30T23:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "grfwncfmg0dmsbtvnuw", "text": "Geburtstage prüfen", "category": "zweiwoechentlich", "nextDueDate": "2026-08-03T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "mat2wjc3u6lmsbtw10a", "text": "Tisch ölen", "category": "jaehrlich", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "2i1oo9d0ng4msbtyonj", "text": "Fahrradlichter laden", "category": "monatlich", "nextDueDate": "2026-08-01T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] },
-    { "id": "mkv2k23dyprmsbtzm4f", "text": "Keller putzen", "category": "quartalsweise", "nextDueDate": "2026-08-22T22:00:00.000Z", "weekdays": [], "customDays": null, "childTemplates": [] }
-  ];
 
   function loadTasks() {
     var storageWorks = true;
@@ -526,6 +426,7 @@
         tasks = JSON.parse(raw).map(normalizeTask);
       } else {
         tasks = buildDefaultTasks();
+        saveTasks();
       }
     } catch (err) {
       storageWorks = false;
@@ -533,25 +434,8 @@
       tasks = buildDefaultTasks();
     }
 
-    var recoveredAdded = 0;
-    try {
-      var existingIds = tasks.map(function (t) { return t.id; });
-      RECOVERY_TASKS.forEach(function (rt) {
-        if (existingIds.indexOf(rt.id) === -1) {
-          tasks.push(normalizeTask(rt));
-          recoveredAdded++;
-        }
-      });
-    } catch (e2) {}
-
-    if (storageWorks) {
-      saveTasks();
-    }
-
     if (!storageWorks) {
       setStatus('Speicherung nicht verfügbar in diesem Browser — es werden Standardaufgaben angezeigt, Änderungen bleiben nur temporär.');
-    } else if (recoveredAdded > 0) {
-      setStatus(recoveredAdded + ' Aufgabe(n) ergänzt. Insgesamt ' + tasks.length + ' Aufgaben geladen.');
     } else {
       setStatus('Geladen: ' + tasks.length + ' Aufgaben.');
     }
